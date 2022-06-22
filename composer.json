@@ -25,6 +25,10 @@
         }
     ],
     "extra": {
+        "statamic": {
+            "name": "Statamic SEO",
+            "description": "A simple seo package for Statamic 3."
+        },
         "laravel": {
             "providers": [
                 "stuartcusackie\\StatamicSEO\\ServiceProvider"
