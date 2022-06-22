@@ -1,0 +1,34 @@
+{
+    "name": "stuartcusackie/statamic-seo",
+    "license": "MIT",
+    "description": "A simple seo package for Statamic 3.",
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.0 || ^9.0",
+        "statamic/cms": "~3.3.12"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "stuartcusackie\\statamic-seo\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stuart Cusack",
+            "email": "stuart@stuartcusack.ie",
+            "homepage": "https://stuartcusack.ie",
+            "role": "President"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "stuartcusackie\\statamic-seo\\ServiceProvider"
+            ]
+        }
+    }
+}
