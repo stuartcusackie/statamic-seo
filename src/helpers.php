@@ -59,7 +59,7 @@ if(!function_exists('get_meta_title')) {
             return $seoData['meta_title'];
         }
 
-    	return $seoData['title'] . config('seo.title_append');
+    	return $seoData['title'] . config('statamic-seo.title_append');
     }
 }
 
@@ -141,7 +141,7 @@ if(!function_exists('get_og_image')) {
             return Statamic::modify($seoData['open_graph_image'])->fixAssetUrl()->fetch();
         }
 
-        return config('seo.og_image') ?? null;
+        return config('statamic-seo.og_image') ?? null;
         
     }
 }

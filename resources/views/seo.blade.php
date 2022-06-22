@@ -12,7 +12,7 @@
 <meta property="article:publisher" content="https://www.facebook.com/CamileThai/" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="{{ $site->locale }}" />
-<meta property="og:site_name" content="{{ config('seo.site_name') }}" />
+<meta property="og:site_name" content="{{ config('statamic-seo.site_name') }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:title" content="{{ get_og_title($seo_data) }}" />
 <meta property="og:description" content="{{ get_og_description($seo_data) }}" />
