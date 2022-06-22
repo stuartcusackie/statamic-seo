@@ -11,7 +11,8 @@ composer require stuartcusackie/statamic-seo
 ## Publish
 
 ```
-php please vendor:publish --tag=statamic-seo
+php please vendor:publish --tag=statamic-seo-config
+php please vendor:publish --tag=statamic-seo-views
 ```
 
 ## Config
@@ -20,4 +21,4 @@ See config file.
 
 ## Usage
 
-@include('partials.seo') ??
+@include('vendor.statamic-seo.seo')
