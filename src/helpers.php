@@ -15,29 +15,23 @@ if(!function_exists('seo_data')) {
      * @param Entry $page
      * @return array
      */
-    function seo_data($page) {
+    function seo_data($page = null) {
 
         $data = [
-            'title' => $page->title
+            'title' => '',
+            'meta_title' => '',
+            'meta_description' => '',
+            'open_graph_title' => '',
+            'open_graph_description' => '',
+            'open_graph_image' => ''
         ];
 
-        if(strlen($page->meta_title)) {
+        if($page) {
+            $data['title'] = $page->title;
             $data['meta_title'] = $page->meta_title;
-        }
-
-        if(strlen($page->meta_description)) {
             $data['meta_description'] = $page->meta_description;
-        }
-
-        if(strlen($page->open_graph_title)) {
             $data['open_graph_title'] = $page->open_graph_title;
-        }
-
-        if(strlen($page->open_graph_description)) {
             $data['open_graph_description'] = $page->open_graph_description;
-        }
-
-        if($page->open_graph_image) {
             $data['open_graph_image'] = $page->open_graph_image;
         }
 
@@ -55,11 +49,14 @@ if(!function_exists('get_meta_title')) {
      */
     function get_meta_title(array $seoData) {
 
-        if(isset($seoData['meta_title'])) {
+        if(strlen($seoData['meta_title'])) {
             return $seoData['meta_title'];
         }
+        else if(strlen($seoData['title'])) {
+            return $seoData['title'] . ' ' . config('statamic-seo.title_append');
+        }
 
-    	return $seoData['title'] . config('statamic-seo.title_append');
+    	return config('statamic-seo.title');
     }
 }
 
@@ -75,7 +72,7 @@ if(!function_exists('get_meta_description')) {
      */
     function get_meta_description(array $seoData) {
 
-        return $seoData['meta_description'] ?? '';
+        return $seoData['meta_description'];
 
     }
 }
@@ -92,7 +89,7 @@ if(!function_exists('get_og_title')) {
      */
     function get_og_title(array $seoData) {
 
-        if(isset($seoData['open_graph_title'])) {
+        if(strlen($seoData['open_graph_title'])) {
             return $seoData['open_graph_title'];
         }
 
@@ -112,7 +109,7 @@ if(!function_exists('get_og_description')) {
      */
     function get_og_description(array $seoData) {
 
-        if(isset($seoData['open_graph_description'])) {
+        if(strlen($seoData['open_graph_description'])) {
             return $seoData['open_graph_description'];
         }
 
