@@ -9,7 +9,7 @@
 
 @stack('canonical')
 
-<meta property="article:publisher" content="https://www.facebook.com/CamileThai/" />
+<meta property="article:publisher" content="https://www.facebook.com/YourBrand/" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="{{ $site->locale }}" />
 <meta property="og:site_name" content="{{ config('statamic-seo.site_name') }}" />
