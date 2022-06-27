@@ -37,7 +37,7 @@ if(!function_exists('seo_data')) {
             $data['open_graph_description'] = $page->open_graph_description;
         }
 
-        if($page->open_graph_image && $page->open_graph_image->raw()) {
+        if($page->open_graph_image) {
             $data['open_graph_image'] = $page->open_graph_image;
         }
 
@@ -131,17 +131,7 @@ if(!function_exists('get_og_image')) {
      */
     function get_og_image(array $seoData) {
 
-        /** 
-         * We have to fix the url because of this bug:
-         * https://github.com/statamic/cms/issues/5593 
-         * crop_focal will not work here probably.
-         */
-
-        if(isset($seoData['open_graph_image'])) {
-            return Statamic::modify($seoData['open_graph_image'])->fixAssetUrl()->fetch();
-        }
-
-        return config('statamic-seo.og_image') ?? null;
+        return $seoData['open_graph_image'] ?? config('statamic-seo.og_image');
         
     }
 }
