@@ -21,24 +21,24 @@ if(!function_exists('seo_data')) {
             'title' => $page->title
         ];
 
-        if(strlen($page->metaTitle)) {
-            $data['meta_title'] = $page->metaTitle;
+        if(strlen($page->meta_title)) {
+            $data['meta_title'] = $page->meta_title;
         }
 
-        if(strlen($page->metaDescription)) {
-            $data['meta_description'] = $page->metaDescription;
+        if(strlen($page->meta_description)) {
+            $data['meta_description'] = $page->meta_description;
         }
 
-        if(strlen($page->openGraphTitle)) {
-            $data['open_graph_title'] = $page->openGraphTitle;
+        if(strlen($page->open_graph_title)) {
+            $data['open_graph_title'] = $page->open_graph_title;
         }
 
-        if(strlen($page->openGraphDescription)) {
-            $data['open_graph_description'] = $page->openGraphDescription;
+        if(strlen($page->open_graph_description)) {
+            $data['open_graph_description'] = $page->open_graph_description;
         }
 
-        if($page->openGraphImage && $page->openGraphImage->raw()) {
-            $data['open_graph_image'] = $page->openGraphImage;
+        if($page->open_graph_image && $page->open_graph_image->raw()) {
+            $data['open_graph_image'] = $page->open_graph_image;
         }
 
         return $data;
