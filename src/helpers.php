@@ -15,16 +15,21 @@ if(!function_exists('seo_data')) {
      * @param Entry $page
      * @return array
      */
-    function seo_data($page = null) {
+    function seo_data($site = null, $page = null) {
 
         $data = [
             'title' => '',
             'meta_title' => '',
             'meta_description' => '',
+            'locale' => '',
             'open_graph_title' => '',
             'open_graph_description' => '',
             'open_graph_image' => ''
         ];
+
+        if($site) {
+            $data['locale'] => $site->locale();
+        }
 
         if($page) {
             $data['title'] = $page->title;
@@ -74,6 +79,24 @@ if(!function_exists('get_meta_description')) {
 
         return $seoData['meta_description'];
 
+    }
+}
+
+if(!function_exists('get_locale')) {
+
+    /**
+     * Return the site locale from seo data
+     * 
+     * @param Array $seoData
+     * @return string
+     */
+    function get_locale(array $seoData) {
+
+        if(empty($seoData['locale'])) {
+            return \Statamic\Facades\Site::current()->locale();
+        }
+        
+        return $seoData['locale'];
     }
 }
 
