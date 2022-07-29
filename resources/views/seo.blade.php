@@ -1,4 +1,4 @@
-@php($seo_data = seo_data($page))
+@php($seo_data = seo_data($site, $page))
 
 <title>{{ get_meta_title($seo_data) }}</title>
 <meta name="description" content="{{ get_meta_description($seo_data) }}" />
@@ -11,7 +11,7 @@
 
 <meta property="article:publisher" content="https://www.facebook.com/YourBrand/" />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content="{{ $site->locale }}" />
+<meta property="og:locale" content="{{ get_locale($seo_data) }}" />
 <meta property="og:site_name" content="{{ config('statamic-seo.site_name') }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:title" content="{{ get_og_title($seo_data) }}" />
