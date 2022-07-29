@@ -28,7 +28,7 @@ if(!function_exists('seo_data')) {
         ];
 
         if($site) {
-            $data['locale'] => $site->locale();
+            $data['locale'] = $site->locale();
         }
 
         if($page) {
