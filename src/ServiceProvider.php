@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Statamic\Providers\AddonServiceProvider;
 use Illuminate\Support\Facades\Event;
 use stuartcusackie\StatamicSEO\StatamicSEO;
-use Statamic\Facades\Collection;
+use Statamic\Facades\Entry;
 use Illuminate\Support\Facades\View;
 
 class ServiceProvider extends AddonServiceProvider
@@ -27,7 +27,7 @@ class ServiceProvider extends AddonServiceProvider
 
         return $this;
     }
-
+ 
     /**
      * Initialise the SEO data on all collection
      * views.
@@ -36,8 +36,18 @@ class ServiceProvider extends AddonServiceProvider
     {
         $views = [];
 
-        foreach(Collection::all() as $collection) {
-            $views[] = $collection->template();
+        /**
+         * This may not be the most efficient way
+         * espcially if we have lots of entries.
+         * Can we get all templates from blueprints
+         * instead??
+         */
+        foreach(Entry::all() as $entry) {
+
+            if(!in_array($entry->template(), $views)) {
+                $views[] = $entry->template();
+            }
+
         }
 
         View::composer($views, function ($view) {
