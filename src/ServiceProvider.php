@@ -27,34 +27,30 @@ class ServiceProvider extends AddonServiceProvider
 
         return $this;
     }
- 
+    
     /**
-     * Initialise the SEO data on all collection
-     * views.
+     * Process the view data that has been set up
+     * by Statamic. This is a bit convoluted but
+     * it's efficient!
      */
     protected function registerViewComposers()
     {
-        $views = [];
+        if($entry = Entry::findByUri('/' . request()->path())) {
 
-        /**
-         * This may not be the most efficient way
-         * espcially if we have lots of entries.
-         * Can we get all templates from blueprints
-         * instead??
-         */
-        foreach(Entry::all() as $entry) {
-
-            if(!in_array($entry->template(), $views)) {
-                $views[] = $entry->template();
-            }
+            View::composer($entry->template(), function ($view) {
+                \StatData::init($view->getData());
+            });
 
         }
+        else if($term = Term::findByUri('/' . request()->path())) {
 
-        View::composer($views, function ($view) {
-            $viewData = $view->getData();
-            \SEO::init($viewData['site'], $viewData['page']);
-        });
+            View::composer($term->template(), function ($view) {
+                $viewData = $view->getData();
+                \SEO::init($viewData['site'], $viewData['page']);
+            });
 
+        }
+        
         return $this;
     }
     
