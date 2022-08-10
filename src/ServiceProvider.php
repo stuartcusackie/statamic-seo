@@ -7,6 +7,7 @@ use Statamic\Providers\AddonServiceProvider;
 use Illuminate\Support\Facades\Event;
 use stuartcusackie\StatamicSEO\StatamicSEO;
 use Statamic\Facades\Entry;
+use Statamic\Facades\Term;
 use Illuminate\Support\Facades\View;
 
 class ServiceProvider extends AddonServiceProvider
