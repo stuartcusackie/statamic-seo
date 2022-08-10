@@ -28,7 +28,7 @@ class ServiceProvider extends AddonServiceProvider
 
         return $this;
     }
-    
+        
     /**
      * Process the view data that has been set up
      * by Statamic. This is a bit convoluted but
@@ -36,16 +36,20 @@ class ServiceProvider extends AddonServiceProvider
      */
     protected function registerViewComposers()
     {
-        if($entry = Entry::findByUri('/' . request()->path())) {
+        // Append slash to path if necessary
+        $path = substr(request()->path(), 0, 1) == '/' ? request()->path() : '/' . request()->path();
+        $template = null;
 
-            View::composer($entry->template(), function ($view) {
-                \StatData::init($view->getData());
-            });
-
+        if($entry = Entry::findByUri($path)) {
+            $template = $entry->template();
         }
-        else if($term = Term::findByUri('/' . request()->path())) {
+        else if($term = Term::findByUri($path)) {
+            $template = $term->template();
+        }
 
-            View::composer($term->template(), function ($view) {
+        if($template) {
+
+            View::composer($template, function ($view) {
                 $viewData = $view->getData();
                 \SEO::init($viewData['site'], $viewData['page']);
             });
