@@ -58,7 +58,7 @@ class Subscriber
             'handle' => 'meta_title',
             'field' => [
                 'input_type' => 'text',
-                'character_limit' => 70,
+                'character_limit' => 60,
                 'antlers' => false,
                 'display' => 'Title',
                 'type' => 'text',
