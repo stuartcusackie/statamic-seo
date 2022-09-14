@@ -23,9 +23,9 @@ See config file.
 
 @include('vendor.statamic-seo.seo')
 
-## Custom Routes
+## IMPORTANT: Custom Routes
 
-Custom routes that are set up in web.php and that use custom controllers won't be initialised with the Statamic data.
+Custom routes that are set up in web.php and that use custom controllers won't be initialised with the Statamic SEO data.
 
 If you are returning a view in your custom controllers then you can initialise the SEO data like so:
 
