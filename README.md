@@ -30,7 +30,7 @@ Custom routes that are set up in web.php and that use custom controllers won't b
 If you are returning a view in your custom controllers then you can initialise the SEO data like so:
 
 ```
-View::composer('materials/show', function ($view) {
+View::composer('pages/custom-view', function ($view) {
   $viewData = $view->getData();
   \SEO::init($viewData['site'], $viewData['page']);
 });
