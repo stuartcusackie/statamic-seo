@@ -34,4 +34,9 @@ View::composer('pages/custom-view', function ($view) {
   $viewData = $view->getData();
   \SEO::init($viewData['site'], $viewData['page']);
 });
+
+return (new \Statamic\View\View)
+  ->template('pages/custom-view')
+  ->layout('layouts/app')
+  ->with(['page' => $page]);
 ```
