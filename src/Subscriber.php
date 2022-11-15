@@ -72,7 +72,7 @@ class Subscriber
                 'type' => 'textarea',
                 'icon' => 'textarea',
                 'listable' => 'hidden',
-                'character_limit' => 300,
+                'character_limit' => 160,
             ]], [
             'handle' => 'open_graph_title',
             'field' => [
