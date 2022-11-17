@@ -23,9 +23,15 @@ class StatamicSEO {
     }
 
     /**
-     * Initialise the class with a data object
+     * Initialise the class with a data object.
+     * Useful when there is no cascade.
      */
     public function init($data) {
+            
+        if(is_array($data)) {
+            $data = (object) $data;
+        }
+        
         $this->data = $data;
     }
 
@@ -36,9 +42,12 @@ class StatamicSEO {
      * @return string
      */
     public function metaTitle() {
-
-        if($this->data) {
-            return strlen($this->data->meta_title) ? $this->data->meta_title : $this->data->title;
+        
+        if(isset($this->data->meta_title) && strlen($this->data->meta_title)) {
+            return $this->data->meta_title;
+        }
+        else if(isset($this->data->title) && strlen($this->data->title) {
+            return $this->data->title;
         }
 
         return config('statamic-seo.title');
@@ -51,7 +60,7 @@ class StatamicSEO {
      */
     public function metaDescription() {
 
-        if($this->data && strlen($this->data->meta_description)) {
+        if(isset($this->data->meta_description) && strlen($this->data->meta_description)) {
             return $this->data->meta_description;
         }
 
@@ -75,7 +84,7 @@ class StatamicSEO {
      */
     public function ogTitle() {
 
-        if($this->data && strlen($this->data->open_graph_title)) {
+        if(isset($this->data->open_graph_title) && strlen($this->data->open_graph_title)) {
             return $this->data->open_graph_title;
         }
 
@@ -90,7 +99,7 @@ class StatamicSEO {
      */
     public function ogDescription() {
 
-        if($this->data && strlen($this->data->open_graph_description)) {
+        if(isset($this->data->open_graph_description) && strlen($this->data->open_graph_description)) {
             return $this->data->open_graph_description;
         }
 
@@ -105,7 +114,7 @@ class StatamicSEO {
      */
     public function ogImage() {
 
-        if($this->data && isset($this->data->open_graph_image)) {
+        if(isset($this->data->open_graph_image)) {
             return $this->data->open_graph_image;
         }
 
@@ -121,7 +130,7 @@ class StatamicSEO {
      */
     public function updatedAt() {
 
-        if($this->data && isset($this->data->updated_at)) {
+        if(isset($this->data->updated_at)) {
             return $this->data->updated_at;
         }
 
