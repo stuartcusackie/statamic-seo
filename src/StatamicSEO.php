@@ -2,34 +2,31 @@
 
 namespace stuartcusackie\StatamicSEO;
 
-use Illuminate\Support\Facades\Cache;
 use Statamic\Facades\Site;
 use Facades\Statamic\View\Cascade;
-use Illuminate\Support\Facades\View;
 
 class StatamicSEO {
 
-    protected $page;
-    protected $site;
+    /**
+     * The source data object
+     * Could be an entry or custom object.
+     */
+    protected $data;
 
     function __construct() {
-
         $cascade = Cascade::instance()->toArray();
-        $this->page = $cascade['page'] ?? null;
-        $this->site = $cascade['site'] ?? null;
-
+        $this->data = $cascade['page'] ?? null;
     }
 
     public function output() {
         return View::make('vendor.statamic-seo.seo');
     }
 
-    public function setPage($page) {
-        $this->page = $page;
-    }
-
-    public function setSite($site) {
-        $this->site = $site;
+    /**
+     * Initialise the class with a data object
+     */
+    public function init($data) {
+        $this->data = $data;
     }
 
     /**
@@ -40,8 +37,8 @@ class StatamicSEO {
      */
     public function metaTitle() {
 
-        if($this->page) {
-            return strlen($this->page->meta_title) ? $this->page->meta_title : $this->page->title;
+        if($this->data) {
+            return strlen($this->data->meta_title) ? $this->data->meta_title : $this->data->title;
         }
 
         return config('statamic-seo.title');
@@ -54,8 +51,8 @@ class StatamicSEO {
      */
     public function metaDescription() {
 
-        if($this->page && strlen($this->page->meta_description)) {
-            return $this->page->meta_description;
+        if($this->data && strlen($this->data->meta_description)) {
+            return $this->data->meta_description;
         }
 
     }
@@ -78,8 +75,8 @@ class StatamicSEO {
      */
     public function ogTitle() {
 
-        if($this->page && strlen($this->page->open_graph_title)) {
-            return $this->page->open_graph_title;
+        if($this->data && strlen($this->data->open_graph_title)) {
+            return $this->data->open_graph_title;
         }
 
         return $this->metaTitle();
@@ -93,8 +90,8 @@ class StatamicSEO {
      */
     public function ogDescription() {
 
-        if($this->page && strlen($this->page->open_graph_description)) {
-            return $this->page->open_graph_description;
+        if($this->data && strlen($this->data->open_graph_description)) {
+            return $this->data->open_graph_description;
         }
 
         return $this->metaDescription();
@@ -108,8 +105,8 @@ class StatamicSEO {
      */
     public function ogImage() {
 
-        if($this->page && isset($this->page->open_graph_image)) {
-            return $this->page->open_graph_image;
+        if($this->data && isset($this->data->open_graph_image)) {
+            return $this->data->open_graph_image;
         }
 
         return config('statamic-seo.og_image');
@@ -124,8 +121,8 @@ class StatamicSEO {
      */
     public function updatedAt() {
 
-        if($this->page && isset($this->page->updated_at)) {
-            return $this->page->updated_at;
+        if($this->data && isset($this->data->updated_at)) {
+            return $this->data->updated_at;
         }
 
     }
