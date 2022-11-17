@@ -12,12 +12,20 @@ class StatamicSEO {
     protected $page;
     protected $site;
 
-    public function initCascadeData() {
+    function __construct() {
 
         $cascade = Cascade::instance()->toArray();
         $this->page = $cascade['page'] ?? null;
         $this->site = $cascade['site'] ?? null;
 
+    }
+
+    public function setPage($page) {
+        $this->page = $page;
+    }
+
+    public function setSite($site) {
+        $this->site = $site;
     }
 
     /**

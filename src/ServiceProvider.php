@@ -13,9 +13,17 @@ class ServiceProvider extends AddonServiceProvider
     public function bootAddon()
     {
         $this
+            ->registerServices()
             ->bootAddonPublishables()
             ->bootAddonSubscriber()
             ->setupViewComposer();
+    }
+
+    protected function registerServices()
+    {
+        $this->app->singleton('SEO', StatamicSEO::class);
+
+        return $this;
     }
     
     protected function bootAddonPublishables(): self
@@ -36,20 +44,16 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function setupViewComposer() {
 
-        $seo = new StatamicSEO;
-
-        View::composer('vendor.statamic-seo.seo', function ($view) use ($seo) {
-
-            $seo->initCascadeData();
+        View::composer('vendor.statamic-seo.seo', function ($view) {
 
             $view->with([
-                'metaTitle' => $seo->metaTitle(),
-                'metaDescription' => $seo->metaDescription(),
-                'locale' => $seo->locale(),
-                'ogTitle' => $seo->ogTitle(),
-                'ogDescription' => $seo->ogDescription(),
-                'ogImage' => $seo->ogImage(),
-                'updatedAt' => $seo->updatedAt()
+                'metaTitle' => \SEO::metaTitle(),
+                'metaDescription' => \SEO::metaDescription(),
+                'locale' => \SEO::locale(),
+                'ogTitle' => \SEO::ogTitle(),
+                'ogDescription' => \SEO::ogDescription(),
+                'ogImage' => \SEO::ogImage(),
+                'updatedAt' => \SEO::updatedAt()
             ]);
         });
 
