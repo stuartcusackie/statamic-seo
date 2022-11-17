@@ -4,44 +4,20 @@ namespace stuartcusackie\StatamicSEO;
 
 use Illuminate\Support\Facades\Cache;
 use Statamic\Facades\Site;
+use Facades\Statamic\View\Cascade;
+use Illuminate\Support\Facades\View;
 
 class StatamicSEO {
 
-    public $seoData = [
-        'title' => '',
-        'meta_title' => '',
-        'meta_description' => '',
-        'locale' => '',
-        'open_graph_title' => '',
-        'open_graph_description' => '',
-        'open_graph_image' => '',
-        'updated_at' => null
-    ];
+    protected $page;
+    protected $site;
 
-    /**
-     * Set the meta data from the template
-     * variables.
-     * 
-     * @return string
-     */
-    public function init($site, $page) {
+    public function initCascadeData() {
 
-        if(isset($site)) {
-            $this->seoData['locale'] = $site->locale();
-        }
+        $cascade = Cascade::instance()->toArray();
+        $this->page = $cascade['page'] ?? null;
+        $this->site = $cascade['site'] ?? null;
 
-        if($page) {
-            $this->seoData['title'] = $page->title;
-            $this->seoData['meta_title'] = $page->meta_title;
-            $this->seoData['meta_description'] = $page->meta_description;
-            $this->seoData['open_graph_title'] = $page->open_graph_title;
-            $this->seoData['open_graph_description'] = $page->open_graph_description;
-            $this->seoData['open_graph_image'] = $page->open_graph_image;
-
-            if(isset($page->updated_at)) {
-                $this->seoData['updated_at'] = $page->updated_at->toIso8601String();
-            }
-        }
     }
 
     /**
@@ -52,11 +28,8 @@ class StatamicSEO {
      */
     public function metaTitle() {
 
-        if(strlen($this->seoData['meta_title'])) {
-            return $this->seoData['meta_title'];
-        }
-        else if(strlen($this->seoData['title'])) {
-            return $this->seoData['title'] . ' ' . config('statamic-seo.title_append');
+        if($this->page) {
+            return strlen($this->page->meta_title) ? $this->page->meta_title : $this->page->title;
         }
 
         return config('statamic-seo.title');
@@ -69,7 +42,9 @@ class StatamicSEO {
      */
     public function metaDescription() {
 
-        return $this->seoData['meta_description'];
+        if($this->page && strlen($this->page->meta_description)) {
+            return $page->meta_description;
+        }
 
     }
 
@@ -81,11 +56,10 @@ class StatamicSEO {
      */
     public function locale() {
 
-        if(empty($this->seoData['locale'])) {
-            return Site::current()->locale();
+        if($this->site && $this->site->locale()) {
+            return $this->site->locale();
         }
         
-        return $this->seoData['locale'];
     }
 
     /**
@@ -96,8 +70,8 @@ class StatamicSEO {
      */
     public function ogTitle() {
 
-        if(strlen($this->seoData['open_graph_title'])) {
-            return $this->seoData['open_graph_title'];
+        if($this->page && strlen($this->page->open_graph_title)) {
+            return $this->page->open_graph_title;
         }
 
         return $this->metaTitle();
@@ -111,8 +85,8 @@ class StatamicSEO {
      */
     public function ogDescription() {
 
-        if(strlen($this->seoData['open_graph_description'])) {
-            return $this->seoData['open_graph_description'];
+        if($this->page && strlen($this->page->open_graph_description)) {
+            return $this->page->open_graph_description;
         }
 
         return $this->metaDescription();
@@ -126,7 +100,11 @@ class StatamicSEO {
      */
     public function ogImage() {
 
-        return $this->seoData['open_graph_image'] ?? config('statamic-seo.og_image');
+        if($this->page && isset($this->page->open_graph_image)) {
+            return $this->page->open_graph_image;
+        }
+
+        return config('statamic-seo.og_image');
         
     }
 
@@ -138,7 +116,9 @@ class StatamicSEO {
      */
     public function updatedAt() {
 
-        return $this->seoData['updated_at'];
+        if($this->page && isset($this->page->updated_at)) {
+            return $this->page->updated_at;
+        }
 
     }
 

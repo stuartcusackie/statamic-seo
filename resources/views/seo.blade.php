@@ -1,17 +1,17 @@
-<title>{{ SEO::metaTitle() }}</title>
-<meta name="description" content="{{ SEO::metaDescription() }}" />
-@if($updatedAt = SEO::updatedAt())
+<title>{{ $metaTitle }}</title>
+<meta name="description" content="{{ $metaDescription }}" />
+@if(isset($updatedAt))
 	<meta property="article:modified_time" content="{{ $updatedAt }}" />
 @endif
 @stack('canonical')
 <meta property="og:type" content="website" />
-<meta property="og:locale" content="{{ SEO::locale() }}" />
+<meta property="og:locale" content="{{ $locale }}" />
 <meta property="og:site_name" content="{{ config('statamic-seo.site_name') }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
-<meta property="og:title" content="{{ SEO::ogTitle() }}" />
-<meta property="og:description" content="{{ SEO::ogDescription() }}" />
+<meta property="og:title" content="{{ $ogTitle }}" />
+<meta property="og:description" content="{{ $ogDescription }}" />
 {{--meta property="article:publisher" content="https://www.facebook.com/YourBrand/" />--}}
-@if($ogImage = SEO::ogImage())
+@if(isset($ogImage))
 	@foreach (Statamic::tag('glide:generate')->src($ogImage)->width(1200)->height(627)->fit('crop_focal')->fm('jpg') as $image)
 		<meta property="og:image" content="{!! url($image['url']) !!}" />
 		<meta property="og:image:width" content="1200" />
