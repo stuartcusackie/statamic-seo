@@ -51,7 +51,7 @@ class StatamicSEO {
     public function metaDescription() {
 
         if($this->page && strlen($this->page->meta_description)) {
-            return $page->meta_description;
+            return $this->page->meta_description;
         }
 
     }
