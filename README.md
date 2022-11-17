@@ -21,13 +21,16 @@ See config file.
 
 ## Usage
 
-@include('vendor.statamic-seo.seo')
+Simple call this in your template's head.
+
+```
+{{ SEO::output() }}
+```
 
 ## IMPORTANT: Custom Routes
 
-When using custom routes you will need to initiate the Facade with your page entry and Statamic site variables.
+When using custom routes you will need to initiate your entry using the facade.
 
 ```
 \SEO::setPage($page);
-\SEO::setSite($site);
 ```

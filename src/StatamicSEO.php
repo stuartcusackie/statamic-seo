@@ -20,6 +20,10 @@ class StatamicSEO {
 
     }
 
+    public function output() {
+        return View::make('vendor.statamic-seo.seo');
+    }
+
     public function setPage($page) {
         $this->page = $page;
     }
@@ -63,11 +67,7 @@ class StatamicSEO {
      * @return string
      */
     public function locale() {
-
-        if($this->site && $this->site->locale()) {
-            return $this->site->locale();
-        }
-        
+        return Site::current()->locale();
     }
 
     /**
