@@ -32,5 +32,7 @@ Simple call this in your template's head.
 When using custom routes you will need to initiate your entry using the facade.
 
 ```
-\SEO::setPage($page);
+use stuartcusackie\StatamicSEO\Facades\SEO;
+
+SEO::init($page);
 ```

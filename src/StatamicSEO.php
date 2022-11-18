@@ -4,6 +4,7 @@ namespace stuartcusackie\StatamicSEO;
 
 use Statamic\Facades\Site;
 use Facades\Statamic\View\Cascade;
+use Illuminate\Support\Facades\View;
 
 class StatamicSEO {
 
@@ -46,7 +47,7 @@ class StatamicSEO {
         if(isset($this->data->meta_title) && strlen($this->data->meta_title)) {
             return $this->data->meta_title;
         }
-        else if(isset($this->data->title) && strlen($this->data->title) {
+        else if(isset($this->data->title) && strlen($this->data->title)) {
             return $this->data->title;
         }
 
