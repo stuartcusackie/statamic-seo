@@ -2,46 +2,38 @@
 
 namespace stuartcusackie\StatamicSEO;
 
-use Illuminate\Support\Facades\Cache;
 use Statamic\Facades\Site;
+use Facades\Statamic\View\Cascade;
+use Illuminate\Support\Facades\View;
 
 class StatamicSEO {
 
-    public $seoData = [
-        'title' => '',
-        'meta_title' => '',
-        'meta_description' => '',
-        'locale' => '',
-        'open_graph_title' => '',
-        'open_graph_description' => '',
-        'open_graph_image' => '',
-        'updated_at' => null
-    ];
+    /**
+     * The source data object
+     * Could be an entry or custom object.
+     */
+    protected $data;
+
+    function __construct() {
+        $cascade = Cascade::instance()->toArray();
+        $this->data = $cascade['page'] ?? null;
+    }
+
+    public function output() {
+        return View::make('vendor.statamic-seo.seo');
+    }
 
     /**
-     * Set the meta data from the template
-     * variables.
-     * 
-     * @return string
+     * Initialise the class with a data object.
+     * Useful when there is no cascade.
      */
-    public function init($site, $page) {
-
-        if(isset($site)) {
-            $this->seoData['locale'] = $site->locale();
+    public function init($data) {
+            
+        if(is_array($data)) {
+            $data = (object) $data;
         }
-
-        if($page) {
-            $this->seoData['title'] = $page->title;
-            $this->seoData['meta_title'] = $page->meta_title;
-            $this->seoData['meta_description'] = $page->meta_description;
-            $this->seoData['open_graph_title'] = $page->open_graph_title;
-            $this->seoData['open_graph_description'] = $page->open_graph_description;
-            $this->seoData['open_graph_image'] = $page->open_graph_image;
-
-            if(isset($page->updated_at)) {
-                $this->seoData['updated_at'] = $page->updated_at->toIso8601String();
-            }
-        }
+        
+        $this->data = $data;
     }
 
     /**
@@ -51,12 +43,12 @@ class StatamicSEO {
      * @return string
      */
     public function metaTitle() {
-
-        if(strlen($this->seoData['meta_title'])) {
-            return $this->seoData['meta_title'];
+        
+        if(isset($this->data->meta_title) && strlen($this->data->meta_title)) {
+            return $this->data->meta_title;
         }
-        else if(strlen($this->seoData['title'])) {
-            return $this->seoData['title'] . ' ' . config('statamic-seo.title_append');
+        else if(isset($this->data->title) && strlen($this->data->title)) {
+            return $this->data->title;
         }
 
         return config('statamic-seo.title');
@@ -69,7 +61,9 @@ class StatamicSEO {
      */
     public function metaDescription() {
 
-        return $this->seoData['meta_description'];
+        if(isset($this->data->meta_description) && strlen($this->data->meta_description)) {
+            return $this->data->meta_description;
+        }
 
     }
 
@@ -80,12 +74,7 @@ class StatamicSEO {
      * @return string
      */
     public function locale() {
-
-        if(empty($this->seoData['locale'])) {
-            return Site::current()->locale();
-        }
-        
-        return $this->seoData['locale'];
+        return Site::current()->locale();
     }
 
     /**
@@ -96,8 +85,8 @@ class StatamicSEO {
      */
     public function ogTitle() {
 
-        if(strlen($this->seoData['open_graph_title'])) {
-            return $this->seoData['open_graph_title'];
+        if(isset($this->data->open_graph_title) && strlen($this->data->open_graph_title)) {
+            return $this->data->open_graph_title;
         }
 
         return $this->metaTitle();
@@ -111,8 +100,8 @@ class StatamicSEO {
      */
     public function ogDescription() {
 
-        if(strlen($this->seoData['open_graph_description'])) {
-            return $this->seoData['open_graph_description'];
+        if(isset($this->data->open_graph_description) && strlen($this->data->open_graph_description)) {
+            return $this->data->open_graph_description;
         }
 
         return $this->metaDescription();
@@ -126,7 +115,11 @@ class StatamicSEO {
      */
     public function ogImage() {
 
-        return $this->seoData['open_graph_image'] ?? config('statamic-seo.og_image');
+        if(isset($this->data->open_graph_image)) {
+            return $this->data->open_graph_image;
+        }
+
+        return config('statamic-seo.og_image');
         
     }
 
@@ -138,7 +131,9 @@ class StatamicSEO {
      */
     public function updatedAt() {
 
-        return $this->seoData['updated_at'];
+        if(isset($this->data->updated_at)) {
+            return $this->data->updated_at;
+        }
 
     }
 
