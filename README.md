@@ -36,3 +36,23 @@ use stuartcusackie\StatamicSEO\Facades\SEO;
 
 SEO::init($page);
 ```
+
+## TODO
+
+- 404 error pages are causing exceptions. For the moment the best strategy is to use a condition in your layout:
+
+Template inheritance example
+```
+@hasSection('metaOveride')
+  @yield('metaOveride)
+@else
+  {{ SEO::output() }}
+@endif
+```
+
+Component example
+```
+@if(isset($metaOverride)) {{ $metaOverride }} @else {{ SEO::output() }} @endif
+```
+
+I will improve this in future by handling http exceptions within the package.
