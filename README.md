@@ -39,7 +39,7 @@ SEO::init($page);
 
 ## TODO
 
-- 404 error pages are causing exceptions. For the moment the best strategy is to use a condition in your layout:
+- 404 error pages are causing Glide exceptions. For the moment the best strategy is to use a condition in your layout:
 
 Template inheritance example
 ```
