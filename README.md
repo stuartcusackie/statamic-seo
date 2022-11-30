@@ -1,6 +1,6 @@
 # STATAMIC SEO
 
-A simple SEO package for Statamic 3
+A simple Blade SEO package for Statamic 3.
 
 ## Installation
 
@@ -21,7 +21,7 @@ See config file.
 
 ## Usage
 
-Simple call this in your template's head.
+Simply call the facade in your template's head.
 
 ```
 {{ SEO::output() }}
@@ -36,23 +36,3 @@ use stuartcusackie\StatamicSEO\Facades\SEO;
 
 SEO::init($page);
 ```
-
-## TODO
-
-- 404 error pages are causing Glide exceptions. For the moment the best strategy is to use a condition in your layout:
-
-Template inheritance example
-```
-@hasSection('metaOveride')
-  @yield('metaOveride)
-@else
-  {{ SEO::output() }}
-@endif
-```
-
-Component example
-```
-@if(isset($metaOverride)) {{ $metaOverride }} @else {{ SEO::output() }} @endif
-```
-
-I will improve this in future by handling http exceptions within the package.
