@@ -20,7 +20,7 @@ class StatamicSEO {
     }
 
     public function output() {
-        return View::make('vendor.statamic-seo.seo');
+        echo view('vendor.statamic-seo.seo')->render();
     }
 
     /**
