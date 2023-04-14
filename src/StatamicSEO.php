@@ -124,6 +124,20 @@ class StatamicSEO {
     }
 
     /**
+     * Return the page date
+     * datetime
+     * 
+     * @return string
+     */
+    public function date() {
+
+        if(isset($this->data->date)) {
+            return $this->data->date;
+        }
+
+    }
+
+    /**
      * Return the page updated_at
      * datetime
      * 

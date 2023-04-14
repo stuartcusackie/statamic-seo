@@ -1,7 +1,8 @@
 <title>{{ $metaTitle }}</title>
 <meta name="description" content="{{ $metaDescription }}" />
+<meta property="article:published_time" content="{{ $date->toW3cString() }}" />
 @if(isset($updatedAt))
-	<meta property="article:modified_time" content="{{ $updatedAt }}" />
+	<meta property="article:modified_time" content="{{ $updatedAt->toW3cString() }}" />
 @endif
 @stack('canonical')
 <meta property="og:type" content="website" />
