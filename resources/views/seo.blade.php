@@ -1,6 +1,8 @@
 <title>{{ $metaTitle }}</title>
 <meta name="description" content="{{ $metaDescription }}" />
+@if(isset($date))
 <meta property="article:published_time" content="{{ $date->toW3cString() }}" />
+@endif
 @if(isset($updatedAt))
 	<meta property="article:modified_time" content="{{ $updatedAt->toW3cString() }}" />
 @endif
