@@ -20,7 +20,7 @@ class StatamicSEO {
     }
 
     public function output() {
-        echo view('vendor.statamic-seo.seo')->render();
+        echo view('statamic-seo::seo')->render();
     }
 
     /**
@@ -43,15 +43,15 @@ class StatamicSEO {
      * @return string
      */
     public function metaTitle() {
-        
-        if(isset($this->data->meta_title) && strlen($this->data->meta_title)) {
+
+        if(!empty($this->data->meta_title)) {
             return $this->data->meta_title;
         }
-        else if(isset($this->data->title) && strlen($this->data->title)) {
-            return $this->data->title;
+        else if(!empty($this->data->title)) {
+           return $this->data->title . config('statamic-seo.title_append');
         }
 
-        return config('statamic-seo.title');
+        return config('statamic-seo.site_name') . config('statamic-seo.title_append');
     }
 
     /**
@@ -61,7 +61,7 @@ class StatamicSEO {
      */
     public function metaDescription() {
 
-        if(isset($this->data->meta_description) && strlen($this->data->meta_description)) {
+        if(!empty($this->data->meta_description)) {
             return $this->data->meta_description;
         }
 
@@ -121,20 +121,6 @@ class StatamicSEO {
 
         return config('statamic-seo.og_image');
         
-    }
-
-    /**
-     * Return the page date
-     * datetime
-     * 
-     * @return string
-     */
-    public function date() {
-
-        if(isset($this->data->date)) {
-            return $this->data->date;
-        }
-
     }
 
     /**

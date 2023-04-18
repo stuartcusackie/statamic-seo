@@ -2,9 +2,8 @@
 
 return [
         
-    'site_name' => 'Your Site Name',
-    'title' => 'Non-Entry Meta Title',
-    'title_append' => '- Entry Append Meta Title',
+    'site_name' => 'My Website',
+    'title_append' => ' - Statamic SEO',
     'og_image' => null,
     'excluded_blueprints' => [],
 

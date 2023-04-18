@@ -43,7 +43,7 @@ class Subscriber
             return;
 
         foreach($this->getFields() as $field) {
-            $event->blueprint->ensureFieldInSection($field['handle'], $field['field'] , 'SEO');
+           $event->blueprint->ensureFieldInSection($field['handle'], $field['field'] , 'SEO');
         };
     }
 

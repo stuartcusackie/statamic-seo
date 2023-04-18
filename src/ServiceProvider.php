@@ -13,9 +13,17 @@ class ServiceProvider extends AddonServiceProvider
     public function bootAddon()
     {
         $this
+            ->loadViews()
             ->bootAddonPublishables()
             ->bootAddonSubscriber()
             ->setupViewComposer();
+    }
+
+    protected function loadViews(): self
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'statamic-seo');
+
+        return $this;
     }
 
     protected function bootAddonPublishables(): self
@@ -36,7 +44,7 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function setupViewComposer() {
 
-        View::composer('vendor.statamic-seo.seo', function ($view) {
+        View::composer('statamic-seo::seo', function ($view) {
 
             $view->with([
                 'metaTitle' => SEO::metaTitle(),
@@ -45,7 +53,6 @@ class ServiceProvider extends AddonServiceProvider
                 'ogTitle' => SEO::ogTitle(),
                 'ogDescription' => SEO::ogDescription(),
                 'ogImage' => SEO::ogImage(),
-                'date' => SEO::date(),
                 'updatedAt' => SEO::updatedAt()
             ]);
         });
