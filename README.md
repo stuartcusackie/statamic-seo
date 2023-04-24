@@ -40,3 +40,4 @@ SEO::init($page);
 ## TODO:
 
 - Customise title for 404 errors.
+- Check if Subscriber is affecting performance.
