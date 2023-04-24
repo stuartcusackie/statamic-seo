@@ -36,3 +36,7 @@ use stuartcusackie\StatamicSEO\Facades\SEO;
 
 SEO::init($page);
 ```
+
+## TODO:
+
+- Customise title for 404 errors.
