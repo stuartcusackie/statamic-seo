@@ -51,7 +51,7 @@ class StatamicSEO {
            return $this->data->title . config('statamic-seo.title_append');
         }
 
-        return config('statamic-seo.site_name') . config('statamic-seo.title_append');
+        return config('app.name') . config('statamic-seo.title_append');
     }
 
     /**

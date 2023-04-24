@@ -6,7 +6,7 @@
 @stack('canonical')
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="{{ $locale }}" />
-<meta property="og:site_name" content="{{ config('statamic-seo.site_name') }}" />
+<meta property="og:site_name" content="{{ config('app.name') }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:title" content="{{ $ogTitle }}" />
 <meta property="og:description" content="{{ $ogDescription }}" />

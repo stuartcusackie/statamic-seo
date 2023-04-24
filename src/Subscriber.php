@@ -97,7 +97,7 @@ class Subscriber
             'handle' => 'open_graph_image',
             'field' => [
                 'mode' => 'grid',
-                'container' => 'images',
+                'container' => config('statamic-seo.og_asset_container'),
                 'restrict' => false,
                 'allow_uploads' => true,
                 'max_files' => 1,
