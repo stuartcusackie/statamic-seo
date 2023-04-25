@@ -14,11 +14,21 @@ class StatamicSEO {
      */
     protected $data;
 
+    /**
+     * Create a new StatamicSEO instance.
+     *
+     * @return void
+     */
     function __construct() {
         $cascade = Cascade::instance()->toArray();
         $this->data = $cascade['page'] ?? null;
     }
 
+    /**
+     * Output the seo partial
+     * 
+     * @return void
+     */
     public function output() {
         echo view('statamic-seo::seo')->render();
     }
@@ -26,6 +36,9 @@ class StatamicSEO {
     /**
      * Initialise the class with a data object.
      * Useful when there is no cascade.
+     * 
+     * @param mixed $data
+     * @return void
      */
     public function init($data) {
             
@@ -44,7 +57,10 @@ class StatamicSEO {
      */
     public function metaTitle() {
 
-        if(!empty($this->data->meta_title)) {
+        if(!$this->data) {
+            return 'Page Not Found ' . config('statamic-seo.title_append');
+        }
+        else if(!empty($this->data->meta_title)) {
             return $this->data->meta_title;
         }
         else if(!empty($this->data->title)) {
@@ -136,5 +152,4 @@ class StatamicSEO {
         }
 
     }
-
 }
