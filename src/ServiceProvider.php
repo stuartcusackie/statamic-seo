@@ -15,7 +15,6 @@ class ServiceProvider extends AddonServiceProvider
         $this
             ->loadViews()
             ->bootAddonPublishables()
-            ->bootAddonSubscriber()
             ->setupViewComposer();
     }
 
@@ -32,12 +31,9 @@ class ServiceProvider extends AddonServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/statamic-seo'),
         ], 'statamic-seo-views');
 
-        return $this;
-    }
-
-    protected function bootAddonSubscriber()
-    {
-        Event::subscribe(Subscriber::class);
+        $this->publishes([
+            __DIR__ . '/../resources/fieldsets' => resource_path('fieldsets/vendor/statamic-seo'),
+        ], 'statamic-seo-fieldsets');
 
         return $this;
     }
