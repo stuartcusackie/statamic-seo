@@ -12,6 +12,7 @@ composer require stuartcusackie/statamic-seo
 
 ```
 php please vendor:publish --tag=statamic-seo-config
+php please vendor:publish --tag=statamic-seo-fieldsets
 php please vendor:publish --tag=statamic-seo-views
 ```
 
