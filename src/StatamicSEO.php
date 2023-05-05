@@ -171,4 +171,17 @@ class StatamicSEO {
         }
 
     }
+
+    /**
+     * Return the global noindex setting
+     * 
+     * @return boolean
+     */
+    public function noIndex() {
+
+         return (env('APP_ENV') == 'local' && $this->globalSeo->noindex_local) || 
+                (env('APP_ENV') == 'staging' && $this->globalSeo->noindex_staging) || 
+                (env('APP_ENV') == 'production' && $this->globalSeo->noindex_production);
+
+    }
 }

@@ -49,7 +49,8 @@ class ServiceProvider extends AddonServiceProvider
                 'ogTitle' => SEO::ogTitle(),
                 'ogDescription' => SEO::ogDescription(),
                 'ogImage' => SEO::ogImage(),
-                'updatedAt' => SEO::updatedAt()
+                'updatedAt' => SEO::updatedAt(),
+                'noIndex' => SEO::noIndex()
             ]);
         });
 

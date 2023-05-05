@@ -3,6 +3,9 @@
 @if(isset($updatedAt))
 	<meta property="article:modified_time" content="{{ $updatedAt }}" />
 @endif
+@if($noIndex)
+   <meta name="robots" content="noindex, nofollow">
+@endif
 @stack('canonical')
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="{{ $locale }}" />
