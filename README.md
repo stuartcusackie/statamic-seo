@@ -43,3 +43,4 @@ SEO::init($page);
 ## TODO
 - Set up global collection description fallbacks
 - Set up environment robot controls
+- Add a static helper to output breadcrumbs schema
