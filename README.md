@@ -4,21 +4,23 @@ A simple Blade SEO package for Statamic 3.
 
 ## Installation
 
+First, install the package.
+
 ```
 composer require stuartcusackie/statamic-seo
 ```
 
+Then, set up a global fieldset with handle 'global_seo'. Assign the statamic-seo:global_seo fieldset to this.
+
+
 ## Publish
 
+Publishing is optional but recommended for views
+
 ```
-php please vendor:publish --tag=statamic-seo-config
-php please vendor:publish --tag=statamic-seo-fieldsets
 php please vendor:publish --tag=statamic-seo-views
+php please vendor:publish --tag=statamic-seo-fieldsets
 ```
-
-## Config
-
-See config file.
 
 ## Usage
 
@@ -38,6 +40,6 @@ use stuartcusackie\StatamicSEO\Facades\SEO;
 SEO::init($page);
 ```
 
-## TODO:
-
-- Check if Subscriber is affecting performance: Replace with artisan commands if so.
+## TODO
+- Set up global collection description fallbacks
+- Set up environment robot controls

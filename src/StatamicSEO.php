@@ -13,6 +13,7 @@ class StatamicSEO {
      * Could be an entry or custom object.
      */
     protected $data;
+    protected $globalSeo;
 
     /**
      * Create a new StatamicSEO instance.
@@ -22,6 +23,7 @@ class StatamicSEO {
     function __construct() {
         $cascade = Cascade::instance()->toArray();
         $this->data = $cascade['page'] ?? null;
+        $this->globalSeo = $cascade['global_seo'] ?? null; 
     }
 
     /**
@@ -57,17 +59,32 @@ class StatamicSEO {
      */
     public function metaTitle() {
 
-        if(!$this->data) {
-            return 'Page Not Found ' . config('statamic-seo.title_append');
-        }
-        else if(!empty($this->data->meta_title)) {
+        $start = '';
+        $end = '';
+        $separator = $this->globalSeo->title_separator ?? '|';
+
+        // Use the custom title for the entry
+        if(!empty($this->data->meta_title)) {
             return $this->data->meta_title;
         }
+
+        // Fallback: start
+        if(!$this->data) {
+            $start = 'Page Not Found';
+        }
         else if(!empty($this->data->title)) {
-           return $this->data->title . config('statamic-seo.title_append');
+            $start = $this->data->title;
+        }
+        
+        // Fallback: end
+        if(!empty($this->globalSeo->site_name)) {
+            $end = $this->globalSeo->site_name;
+        }
+        else {
+            $end = config('app.name');
         }
 
-        return config('app.name') . config('statamic-seo.title_append');
+        return trim($start) . ' ' . $separator . ' ' . trim($end);
     }
 
     /**
@@ -135,7 +152,9 @@ class StatamicSEO {
             return $this->data->open_graph_image;
         }
 
-        return config('statamic-seo.og_image');
+        if(!empty($this->globalSeo->open_graph_image)) {
+            return $this->globalSeo->open_graph_image;
+        }
         
     }
 

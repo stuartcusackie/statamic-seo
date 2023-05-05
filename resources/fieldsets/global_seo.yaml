@@ -1,0 +1,178 @@
+title: 'Global SEO'
+fields:
+  -
+    handle: section_title
+    field:
+      type: section
+      instructions: 'Page titles defaults.'
+      display: Titles
+  -
+    handle: title_separator
+    field:
+      options:
+        '|': '|'
+        '-': '-'
+        '/': '/'
+        '::': '::'
+        '>': '>'
+        '~': '~'
+      default: ' | '
+      clearable: false
+      multiple: false
+      searchable: true
+      localizable: true
+      taggable: false
+      push_tags: false
+      cast_booleans: false
+      type: select
+      instructions: 'Select the character to separate the page title and site title.'
+      instructions_position: below
+      width: 33
+      listable: hidden
+      display: Separator
+  -
+    handle: site_name
+    field:
+      input_type: text
+      type: text
+      localizable: true
+      listable: hidden
+      display: 'Website title'
+      instructions: "The title for the website. Defaults to Laravel's App Name."
+      instructions_position: below
+      width: 66
+  -
+    handle: section_description
+    field:
+      type: section
+      instructions: "Set fallback data per collection to use as meta, OG and Twitter descriptions when users don't fill in those fields."
+      display: Descriptions
+  -
+    handle: collection_defaults
+    field:
+      fields:
+        -
+          handle: collection
+          field:
+            max_items: 1
+            mode: select
+            display: Collection
+            type: collections
+            icon: collections
+            instructions: 'The collection for this fallback.'
+            instructions_position: below
+            width: 33
+            listable: hidden
+        -
+          handle: fallback
+          field:
+            options:
+              field: 'Custom field'
+              custom_text: 'Custom text'
+              page_builder: 'First text in page builder'
+            multiple: false
+            max_items: 1
+            clearable: false
+            searchable: false
+            taggable: false
+            push_tags: false
+            cast_booleans: false
+            display: Fallback
+            type: select
+            icon: select
+            instructions: 'The fallback type'
+            instructions_position: below
+            width: 33
+            listable: hidden
+        -
+          handle: field_handle
+          field:
+            input_type: text
+            antlers: false
+            display: 'Field handle'
+            type: text
+            icon: text
+            instructions: 'The custom field handle.'
+            instructions_position: below
+            width: 33
+            listable: hidden
+            if:
+              fallback: 'equals field'
+        -
+          handle: custom_text
+          field:
+            character_limit: '160'
+            antlers: false
+            display: 'Custom text'
+            type: textarea
+            icon: textarea
+            instructions: 'The custom text. Max 160 characters.'
+            instructions_position: below
+            width: 33
+            listable: hidden
+            if:
+              fallback: 'equals custom_text'
+      mode: stacked
+      add_row: 'Add collection default'
+      reorderable: true
+      display: 'Collection defaults'
+      type: grid
+      icon: grid
+      instructions: 'Set fallback meta descriptions for each collection.'
+      listable: hidden
+  -
+    handle: section_og
+    field:
+      type: section
+      instructions: 'Default settings for Social Sharing.'
+      display: Social
+  -
+    handle: open_graph_image
+    field:
+      mode: list
+      container: assets
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      localizable: true
+      listable: hidden
+      display: 'Social image'
+      instructions: 'The default OG image. Can be overridden per entry. The recommended size is 1200px x 627px. This image will be focal cropped to this dimension.'
+      instructions_position: below
+      visibility: visible
+      always_save: false
+      show_filename: true
+      width: 50
+  -
+    handle: section_environments_noindex
+    field:
+      type: section
+      instructions: 'When to noindex and nofollow by default.'
+      display: Environments
+  -
+    handle: noindex_local
+    field:
+      type: toggle
+      instructions_position: below
+      listable: false
+      display: Local
+      default: true
+      width: 33
+  -
+    handle: noindex_staging
+    field:
+      type: toggle
+      instructions_position: below
+      listable: false
+      display: Staging
+      default: true
+      width: 33
+  -
+    handle: noindex_production
+    field:
+      type: toggle
+      instructions_position: below
+      listable: false
+      display: Production
+      width: 33
