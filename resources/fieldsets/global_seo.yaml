@@ -121,7 +121,7 @@ fields:
       instructions: 'Set fallback meta descriptions for each collection.'
       listable: hidden
   -
-    handle: section_og
+    handle: section_open_graph
     field:
       type: section
       instructions: 'Default settings for Social Sharing.'
