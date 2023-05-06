@@ -49,6 +49,7 @@ class StatamicSEO {
             'ogTitle' => $this->ogTitle($title),
             'ogDescription' => $this->ogDescription($description),
             'ogImage' => $this->ogImage(),
+            'date' => $this->date(),
             'updatedAt' => $this->updatedAt(),
             'noIndex' => $this->noIndex()
         ];
@@ -218,6 +219,20 @@ class StatamicSEO {
     }
 
     /**
+     * Return the page date
+     * datetime
+     * 
+     * @return string
+     */
+    public function date() {
+
+        if(isset($this->page->date)) {
+            return $this->page->date;
+        }
+
+    }
+
+    /**
      * Return the page updated_at
      * datetime
      * 
@@ -257,17 +272,15 @@ class StatamicSEO {
 
         foreach($replicator as $set) {
             foreach($set as $key => $field) {
-                if(!in_array($key, ['id', 'type'])) {
-                    if(is_object($field) && get_class($field) == 'Statamic\Fields\Value') {
+                if(is_object($field) && get_class($field) == 'Statamic\Fields\Value') {
 
-                        $text = $this->getFieldText($field);
+                    $text = $this->getFieldText($field);
 
-                        if(strlen($text)) {
-                            $segments[] = $text;
-                        }
+                    if(strlen($text)) {
+                        $segments[] = $text;
+                    }
 
-                    }                                        
-                }
+                }                                        
             }
         }
 
@@ -308,12 +321,11 @@ class StatamicSEO {
      */
     public function simplifyText($text) {
 
-        //$text = preg_replace("/[\r\n]+/", ". ", $text);
         $text = preg_replace("/[^a-zA-Z0-9.,;!? ]+/", " ", $text);
         $text = preg_replace('/\s+/', ' ', $text);
         $text = htmlentities($text);
         
-        return $text;
+        return trim($text);
 
     }
 }
