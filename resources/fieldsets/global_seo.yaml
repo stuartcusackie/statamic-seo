@@ -69,7 +69,6 @@ fields:
             options:
               field: 'Custom field'
               custom_text: 'Custom text'
-              page_builder: 'First text in page builder'
             multiple: false
             max_items: 1
             clearable: false

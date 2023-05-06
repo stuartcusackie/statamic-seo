@@ -41,17 +41,7 @@ class ServiceProvider extends AddonServiceProvider
     protected function setupViewComposer() {
 
         View::composer('statamic-seo::seo', function ($view) {
-
-            $view->with([
-                'metaTitle' => SEO::metaTitle(),
-                'metaDescription' => SEO::metaDescription(),
-                'locale' => SEO::locale(),
-                'ogTitle' => SEO::ogTitle(),
-                'ogDescription' => SEO::ogDescription(),
-                'ogImage' => SEO::ogImage(),
-                'updatedAt' => SEO::updatedAt(),
-                'noIndex' => SEO::noIndex()
-            ]);
+            $view->with(SEO::data());
         });
 
     }
