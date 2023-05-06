@@ -88,6 +88,7 @@ class StatamicSEO {
         }
         
         $this->page = $page;
+        $this->generate();
     }
 
     /**
@@ -133,6 +134,10 @@ class StatamicSEO {
      * @return string
      */
     public function metaDescription() {
+
+        if(!$this->page) {
+            return '';
+        }
 
         if(!empty($this->page->meta_description)) {
             return $this->page->meta_description;
@@ -276,7 +281,7 @@ class StatamicSEO {
 
                     $text = $this->getFieldText($field);
 
-                    if(strlen($text)) {
+                    if(!empty($text)) {
                         $segments[] = $text;
                     }
 
