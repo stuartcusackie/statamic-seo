@@ -1,11 +1,13 @@
 <title>{{ $metaTitle }}</title>
 <meta name="description" content="{{ $metaDescription }}" />
-<meta property="article:published_time" content="{{ $date->toW3cString() }}" />
+@if(isset($date))
+	<meta property="article:published_time" content="{{ $date->toW3cString() }}" />
+@endif
 @if(isset($updatedAt))
 	<meta property="article:modified_time" content="{{ $updatedAt->toW3cString() }}" />
 @endif
 @if($noIndex)
-   <meta name="robots" content="noindex, nofollow">
+	<meta name="robots" content="noindex, nofollow">
 @endif
 @stack('canonical')
 <meta property="og:type" content="website" />
