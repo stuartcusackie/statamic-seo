@@ -1,5 +1,7 @@
 <title>{{ $metaTitle }}</title>
+@if(strlen($metaDescription))
 <meta name="description" content="{{ $metaDescription }}" />
+@endif
 @if(isset($date))
 	<meta property="article:published_time" content="{{ $date->toW3cString() }}" />
 @endif
