@@ -15,7 +15,7 @@ Then, set up a global fieldset with handle 'global_seo'. Assign the statamic-seo
 
 ## Publish
 
-Publishing is optional but recommended for views
+You should publish both views and fieldsets. You may need to configure the asset container for image fields, defaults to 'assets'.
 
 ```
 php please vendor:publish --tag=statamic-seo-views
