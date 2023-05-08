@@ -41,4 +41,4 @@ SEO::init($page);
 ```
 
 ## TODO
-- Set up global collection description fallbacks
+- Try to convert global 'collection' fallbacks to global 'blueprint' fallbacks: Collections may not always contain the fallback field.
