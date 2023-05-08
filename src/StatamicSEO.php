@@ -20,15 +20,21 @@ class StatamicSEO {
     protected $data;
 
     /**
-     * Create a new StatamicSEO instance.
+     * Create a new StatamicSEO instance
+     * and generate the SEO data.
      *
      * @return void
      */
     function __construct() {
+
         $this->cascade = Cascade::instance()->toArray();
         $this->page = $this->cascade['page'] ?? null;
         $this->globalSeo = $this->cascade['global_seo'] ?? null;
-        $this->generate();
+
+        if(!empty($this->cascade)) {
+            $this->generate();
+        }
+        
     }
 
     /**
@@ -43,6 +49,7 @@ class StatamicSEO {
         $description = $this->metaDescription();
 
         $this->data = [
+            'siteName' => $this->siteName(),
             'metaTitle' => $title,
             'metaDescription' => $description,
             'locale' => $this->locale(),
@@ -91,6 +98,17 @@ class StatamicSEO {
         $this->generate();
     }
 
+    public function siteName() {
+
+        if(!empty($this->globalSeo->site_name)) {
+            return $this->globalSeo->site_name;
+        }
+        else {
+            $end = config('app.name');
+        }
+
+    }
+
     /**
      * Return the meta title.
      * or fallback.
@@ -99,16 +117,15 @@ class StatamicSEO {
      */
     public function metaTitle() {
 
-        $start = '';
-        $end = '';
-        $separator = $this->globalSeo->title_separator ?? '|';
-
         // Use the custom title for the entry
         if(!empty($this->page->meta_title)) {
             return $this->page->meta_title;
         }
 
-        // Fallback: start
+        // Fallback
+        $start = '';
+        $separator = $this->globalSeo->title_separator ?? '|';
+
         if(!$this->page) {
             $start = 'Page Not Found';
         }
@@ -116,15 +133,7 @@ class StatamicSEO {
             $start = $this->page->title;
         }
         
-        // Fallback: end
-        if(!empty($this->globalSeo->site_name)) {
-            $end = $this->globalSeo->site_name;
-        }
-        else {
-            $end = config('app.name');
-        }
-
-        return trim($start) . ' ' . $separator . ' ' . trim($end);
+        return trim($start) . ' ' . $separator . ' ' . trim($this->siteName());
     }
 
 

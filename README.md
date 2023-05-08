@@ -15,7 +15,7 @@ Then, set up a global fieldset with handle 'global_seo'. Assign the statamic-seo
 
 ## Publish
 
-You should publish both views and fieldsets. You may need to configure the asset containers for image fields in each fieldset, defaults to 'assets'.
+Publishing is optional but recommended for views
 
 ```
 php please vendor:publish --tag=statamic-seo-views
@@ -41,4 +41,4 @@ SEO::init($page);
 ```
 
 ## TODO
-- Try to convert global 'collection' fallbacks to global 'blueprint' fallbacks: Collections may not always contain the fallback field.
+- Set up global collection description fallbacks
