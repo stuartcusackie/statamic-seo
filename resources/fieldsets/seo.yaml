@@ -11,6 +11,7 @@ fields:
     icon: text
     instructions: 'Defaults to entry name and configured appendage'
     listable: hidden
+    localizable: true
 -
   handle: meta_description
   field:
@@ -20,6 +21,7 @@ fields:
     icon: textarea
     listable: hidden
     character_limit: 160
+    localizable: true
 -
   handle: open_graph_title
   field:
@@ -31,6 +33,7 @@ fields:
     icon: text
     instructions: 'OG data is used by various social media sites'
     listable: hidden
+    localizable: true
 -
   handle: open_graph_description
   field:
@@ -40,6 +43,7 @@ fields:
     type: textarea
     icon: textarea
     listable: hidden
+    localizable: true
 -
   handle: open_graph_image
   field:
@@ -53,3 +57,4 @@ fields:
     icon: assets
     listable: hidden
     instructions: 'This image will be automatically cropped to 1200 x 627 pixels.'
+    localizable: true
