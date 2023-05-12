@@ -288,10 +288,6 @@ class StatamicSEO {
             foreach($set as $key => $field) {
                 if(is_object($field) && get_class($field) == 'Statamic\Fields\Value') {
 
-                    if(!$field->value()) {
-                        continue;
-                    }
-
                     $text = $this->getFieldText($field);
 
                     if(!empty($text)) {
@@ -320,7 +316,7 @@ class StatamicSEO {
         if($class == 'Statamic\Fieldtypes\Replicator') {
             return $this->getReplicatorText($field);
         }
-        else if($class == 'Statamic\Fieldtypes\Bard') {
+        else if($class == 'Statamic\Fieldtypes\Bard' && $field->raw()) {
             return Statamic::modify($field)->bard_text();
         }
         else if($class == 'Statamic\Fieldtypes\Textarea' ||
