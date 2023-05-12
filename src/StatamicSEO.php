@@ -288,6 +288,10 @@ class StatamicSEO {
             foreach($set as $key => $field) {
                 if(is_object($field) && get_class($field) == 'Statamic\Fields\Value') {
 
+                    if(!$field->value()) {
+                        continue;
+                    }
+
                     $text = $this->getFieldText($field);
 
                     if(!empty($text)) {
@@ -335,7 +339,7 @@ class StatamicSEO {
      */
     public function simplifyText($text) {
 
-        $text = preg_replace("/[^a-zA-Z0-9.,;!? ]+/", " ", $text);
+        $text = preg_replace("/[^a-zA-Z0-9.,;!?' ]+/", " ", $text);
         $text = preg_replace('/\s+/', ' ', $text);
         $text = htmlentities($text);
         
