@@ -41,5 +41,7 @@ SEO::init($page);
 ```
 
 ## TODO
-- Try to convert global 'collection' fallbacks to global 'blueprint' fallbacks: Collections may not always contain the fallback field.
+- Try to convert global 'collection' fallbacks to global 'blueprint' fallbacks.
+  - Collections may not always contain the fallback field.
+  - This should work for terms as well.
 - Set up blueprint / collection based fallbacks for og image.
