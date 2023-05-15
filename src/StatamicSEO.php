@@ -152,6 +152,10 @@ class StatamicSEO {
             return $this->page->meta_description;
         }
 
+        if(get_class($this->page) == 'Statamic\Taxonomies\LocalizedTerm') {
+            return '';
+        }
+
         // Fallback to global description settings
         foreach($this->globalSeo->collection_defaults as $settings) {
 
