@@ -16,6 +16,7 @@ class StatamicSEO {
      */
     protected $cascade;
     protected $page;
+    protected $site;
     protected $globalSeo;
     protected $data;
 
@@ -29,12 +30,10 @@ class StatamicSEO {
 
         $this->cascade = Cascade::instance()->toArray();
         $this->page = $this->cascade['page'] ?? null;
+        $this->site = $this->cascade['site'] ?? null;
         $this->globalSeo = $this->cascade['global_seo'] ?? null;
 
-        if(!empty($this->cascade)) {
-            $this->generate();
-        }
-        
+        $this->generate();    
     }
 
     /**
@@ -104,7 +103,7 @@ class StatamicSEO {
             return $this->globalSeo->site_name;
         }
         else {
-            $end = config('app.name');
+            return config('app.name');
         }
 
     }
@@ -183,7 +182,12 @@ class StatamicSEO {
      * @return string
      */
     public function locale() {
-        return Site::current()->locale();
+
+        if(is_null($this->site)) {
+            return app()->getLocale();
+        }
+
+        return $this->site->short_locale;
     }
 
     /**
@@ -270,6 +274,10 @@ class StatamicSEO {
      * @return boolean
      */
     public function noIndex() {
+
+        if(is_null($this->globalSeo)) {
+            return false;
+        }
 
          return (env('APP_ENV') == 'local' && $this->globalSeo->noindex_local) || 
                 (env('APP_ENV') == 'staging' && $this->globalSeo->noindex_staging) || 
