@@ -45,3 +45,6 @@ SEO::init($page);
   - Collections may not always contain the fallback field.
   - This should work for terms as well.
 - Set up blueprint / collection based fallbacks for og image.
+- Add schemas
+  - Breadcrumbs with toggling option
+  - Per page schemas
