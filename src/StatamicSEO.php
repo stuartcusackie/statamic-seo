@@ -151,7 +151,11 @@ class StatamicSEO {
             return $this->page->meta_description;
         }
 
-        if(get_class($this->page) == 'Statamic\Taxonomies\LocalizedTerm') {
+        // No description for tax / tags - Need to improve!
+        if(in_array(get_class($this->page), [
+            'Statamic\Taxonomies\LocalizedTerm',
+            'Statamic\Taxonomies\Taxonomy'
+        ])) {
             return '';
         }
 
