@@ -27,13 +27,23 @@ class StatamicSEO {
      * @return void
      */
     function __construct() {
+        $this->initCascadeArray(Cascade::instance()->toArray());
+    }
 
-        $this->cascade = Cascade::instance()->toArray();
-        $this->page = $this->cascade['page'] ?? null;
-        $this->site = $this->cascade['site'] ?? null;
-        $this->globalSeo = $this->cascade['global_seo'] ?? null;
+     /**
+     * Initialise a cascade array.
+     * 
+     * @param array $cascade
+     * @return void
+     */
+    public function initCascadeArray($cascade) {
 
-        $this->generate();    
+        $this->cascade = $cascade;
+        $this->page = $cascade['page'] ?? null;
+        $this->site = $cascade['site'] ?? null;
+        $this->globalSeo = $cascade['global_seo'] ?? null;
+
+        $this->generate();
     }
 
     /**
@@ -78,23 +88,6 @@ class StatamicSEO {
      */
     public function output() {
         echo view('statamic-seo::seo')->render();
-    }
-
-    /**
-     * Initialise the class with a page object.
-     * Useful when there is no cascade.
-     * 
-     * @param mixed $page
-     * @return void
-     */
-    public function init($page) {
-            
-        if(is_array($page)) {
-            $page = (object) $page;
-        }
-        
-        $this->page = $page;
-        $this->generate();
     }
 
     public function siteName() {
