@@ -1,6 +1,6 @@
 # STATAMIC SEO
 
-A simple Blade SEO package for Statamic 3.
+A simple Blade SEO package for Statamic 3. WARNING: Use with caution. Not tested very well. I use this package for unusual Statamic projects of my own.
 
 ## Installation
 
@@ -37,7 +37,17 @@ When using custom routes you will need to initiate your entry using the facade.
 ```
 use stuartcusackie\StatamicSEO\Facades\SEO;
 
-SEO::init($page);
+public function customRoute(Request $request, $entry) {
+
+  $view = (new \Statamic\View\View)
+    ->template($entry->template)
+    ->layout('layouts/custom')
+    ->with(['page' => $entry]);
+
+  SEO::initCascadeArray($view->gatherData());
+
+  return $view;
+}
 ```
 
 ## TODO
