@@ -32,7 +32,7 @@ Simply call the facade in your template's head.
 
 ## IMPORTANT: Custom Routes
 
-When using custom routes you will need to initiate your entry using the facade.
+When using custom routes you will need to initiate the cascade manually using the provided Facade.
 
 ```
 use stuartcusackie\StatamicSEO\Facades\SEO;
