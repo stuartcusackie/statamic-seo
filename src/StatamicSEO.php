@@ -320,17 +320,21 @@ class StatamicSEO {
      */
     public function getFieldText(Statamic\Fields\Value $field) {  
 
-        $class = get_class($field->fieldtype());
+        if($fieldType = $field->fieldtype()) {
 
-        if($class == 'Statamic\Fieldtypes\Replicator') {
-            return $this->getReplicatorText($field);
-        }
-        else if($class == 'Statamic\Fieldtypes\Bard' && $field->raw()) {
-            return Statamic::modify($field)->bard_text();
-        }
-        else if($class == 'Statamic\Fieldtypes\Textarea' ||
-            $class == 'Statamic\Fieldtypes\Markdown') {
-            return $field->raw();
+            $class = get_class($fieldType);
+
+            if($class == 'Statamic\Fieldtypes\Replicator') {
+                return $this->getReplicatorText($field);
+            }
+            else if($class == 'Statamic\Fieldtypes\Bard' && $field->raw()) {
+                return Statamic::modify($field)->bard_text();
+            }
+            else if($class == 'Statamic\Fieldtypes\Textarea' ||
+                $class == 'Statamic\Fieldtypes\Markdown') {
+                return $field->raw();
+            }
+
         }
 
     }
