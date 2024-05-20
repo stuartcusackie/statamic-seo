@@ -152,6 +152,11 @@ class StatamicSEO {
             return '';
         }
 
+        // No fallback, no description
+        if(!isset($this->globalSeo->collection_defaults)) {
+            return '';
+        }
+
         // Fallback to global description settings
         foreach($this->globalSeo->collection_defaults as $settings) {
 
