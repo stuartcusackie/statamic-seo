@@ -58,3 +58,4 @@ public function customRoute(Request $request, $entry) {
 - Add schemas
   - Breadcrumbs with toggling option
   - Per page schemas
+- Add prev next canonical tags
