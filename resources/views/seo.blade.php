@@ -1,5 +1,5 @@
-<title>{{ $metaTitle }}</title> 
-@if(strlen($metaDescription)) 
+<title>{{ $metaTitle }}</title>
+@if(strlen($metaDescription))
 <meta name="description" content="{{ $metaDescription }}" />
 @endif
 @if(isset($date))
@@ -11,6 +11,8 @@
 @if($noIndex)
 <meta name="robots" content="noindex, nofollow">
 @endif
+<link href="{{ url('/') }}" rel="home" />
+<link href="{{ rtrim(url()->full(), "/") }}" rel="canonical" />
 @stack('canonical')
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="{{ $locale }}" />
